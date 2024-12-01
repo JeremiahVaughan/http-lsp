@@ -2,4 +2,4 @@ t:
 	go test ./...
 
 b: 
-	go run .
+	go build -o ./main .

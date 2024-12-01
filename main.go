@@ -68,50 +68,50 @@ func handleMessage(logger *log.Logger, method string, bytes []byte) error {
 			"Changed: %s",
 			request.Params.TextDocument.Uri,
 		)
-		err = WriteResponse(lsp.PublishDiagnosticsNotification{
-			Notification: lsp.Notification{
-				RPC:    "2.0",
-				Method: "textDocument/publishDiagnostics",
-			},
-			Params: lsp.PublishDiagnosticsParams{
-				Uri: request.Params.TextDocument.Uri,
-				Diagnostics: []lsp.Diagnostic{
-					{
-						Range: lsp.Range{
-							Start: lsp.Position{
-								Line:      0,
-								Character: 0,
-							},
-							End: lsp.Position{
-								Line:      0,
-								Character: 5,
-							},
-						},
-						Severity: 1,
-						Source:   "me stuff",
-						Message:  "you made a change",
-					},
-					{
-						Range: lsp.Range{
-							Start: lsp.Position{
-								Line:      1,
-								Character: 0,
-							},
-							End: lsp.Position{
-								Line:      1,
-								Character: 5,
-							},
-						},
-						Severity: 1,
-						Source:   "me stuff 2",
-						Message:  "you made a change",
-					},
-				},
-			},
-		})
-		if err != nil {
-			logger.Fatalf("error, when WriteResponse() for textDocument/didChange method for handleMessage(). Error: %v", err)
-		}
+		// err = WriteResponse(lsp.PublishDiagnosticsNotification{
+		// 	Notification: lsp.Notification{
+		// 		RPC:    "2.0",
+		// 		Method: "textDocument/publishDiagnostics",
+		// 	},
+		// 	Params: lsp.PublishDiagnosticsParams{
+		// 		Uri: request.Params.TextDocument.Uri,
+		// 		Diagnostics: []lsp.Diagnostic{
+		// 			{
+		// 				Range: lsp.Range{
+		// 					Start: lsp.Position{
+		// 						Line:      0,
+		// 						Character: 0,
+		// 					},
+		// 					End: lsp.Position{
+		// 						Line:      0,
+		// 						Character: 5,
+		// 					},
+		// 				},
+		// 				Severity: 1,
+		// 				Source:   "me stuff",
+		// 				Message:  "you made a change",
+		// 			},
+		// 			{
+		// 				Range: lsp.Range{
+		// 					Start: lsp.Position{
+		// 						Line:      1,
+		// 						Character: 0,
+		// 					},
+		// 					End: lsp.Position{
+		// 						Line:      1,
+		// 						Character: 5,
+		// 					},
+		// 				},
+		// 				Severity: 1,
+		// 				Source:   "me stuff 2",
+		// 				Message:  "you made a change",
+		// 			},
+		// 		},
+		// 	},
+		// })
+		// if err != nil {
+		// 	logger.Fatalf("error, when WriteResponse() for textDocument/didChange method for handleMessage(). Error: %v", err)
+		// }
 	case "textDocument/hover":
 		var request lsp.HoverRequest
 		err := json.Unmarshal(bytes, &request)
@@ -190,11 +190,132 @@ func handleMessage(logger *log.Logger, method string, bytes []byte) error {
 				RPC: "2.0",
 				Id:  &request.ID,
 			},
+			// todo make these values contextually aware
 			Result: []lsp.CompletionItem{
 				{
-					Label:         "NVIM (btw)",
-					Detail:        "Best editor",
-					Documentation: "the only editor I use",
+					Label:         "http://",
+					Detail:        "http",
+					Documentation: "unencrypted",
+				},
+				{
+					Label:         "https://",
+					Detail:        "https",
+					Documentation: "encrypted",
+				},
+				{
+					Label:         "POST ",
+					Detail:        "post method",
+					Documentation: "post method",
+				},
+				{
+					Label:         "PUT ",
+					Detail:        "put method",
+					Documentation: "put method",
+				},
+				{
+					Label:         "PATCH ",
+					Detail:        "patch method",
+					Documentation: "patch method",
+				},
+				{
+					Label:         "GET ",
+					Detail:        "get method",
+					Documentation: "get method",
+				},
+				{
+					Label:         "DELETE ",
+					Detail:        "delete method",
+					Documentation: "delete method",
+				},
+				{
+					Label:         "User-Agent: ",
+					Detail:        "http header user agent",
+					Documentation: "http header user agent",
+				},
+				{
+					Label:         "Accept-Language: ",
+					Detail:        "http header accept language",
+					Documentation: "http header accept language",
+				},
+				{
+					Label:         "Accept-Encoding: ",
+					Detail:        "http header accept encoding",
+					Documentation: "http header accept encoding",
+				},
+				{
+					Label:         "br",
+					Detail:        "accept-encoding value br",
+					Documentation: "accept-encoding value br",
+				},
+				{
+					Label:         "gzip",
+					Detail:        "accept-encoding value gzip",
+					Documentation: "accept-encoding value gzip",
+				},
+				{
+					Label:         "deflate",
+					Detail:        "accept-encoding value deflate",
+					Documentation: "accept-encoding value deflate",
+				},
+				{
+					Label:         "Accept: ",
+					Detail:        "http header accept",
+					Documentation: "http header accept",
+				},
+				{
+					Label:         "Content-Type: ",
+					Detail:        "http header content type",
+					Documentation: "http header content type",
+				},
+				{
+					Label:         "application/x-www-form-urlencoded",
+					Detail:        "content type value",
+					Documentation: "content type value",
+				},
+				{
+					Label:         "application/json",
+					Detail:        "accept or content type value",
+					Documentation: "accept or content type value",
+				},
+				{
+					Label:         "text/html",
+					Detail:        "accept value",
+					Documentation: "accept value",
+				},
+				{
+					Label:         "Referer: ",
+					Detail:        "http header referer",
+					Documentation: "http header referer",
+				},
+				{
+					Label:         "Connection: ",
+					Detail:        "http header connection",
+					Documentation: "http header connection",
+				},
+				{
+					Label:         "Cache-Control: ",
+					Detail:        "http header cache-control",
+					Documentation: "http header cache-control",
+				},
+				{
+					Label:         "max-age=",
+					Detail:        "cache-control value",
+					Documentation: "unit is seconds",
+				},
+				{
+					Label:         "Host: ",
+					Detail:        "http header host",
+					Documentation: "http header host",
+				},
+				{
+					Label:         "HTTP/1.1",
+					Detail:        "protocol version 1",
+					Documentation: "protocol version version 1",
+				},
+				{
+					Label:         "HTTP/2",
+					Detail:        "protocol version 2",
+					Documentation: "protocol version version 2",
 				},
 			},
 		}
