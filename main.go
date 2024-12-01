@@ -4,9 +4,9 @@ import (
 	"bufio"
 	"encoding/json"
 	"fmt"
+	"github.com/JeremiahVaughan/http-lsp/lsp"
+	"github.com/JeremiahVaughan/http-lsp/rpc"
 	"log"
-	"nvim-http/lsp"
-	"nvim-http/rpc"
 	"os"
 )
 
