@@ -10,8 +10,15 @@ import (
 	"os"
 )
 
+var tempFile *os.File
+
 func main() {
-	logger := getLogger("/tmp/nvim-http-log.txt")
+	var err error
+	tempFile, err = os.CreateTemp("", "nvim-http-log.txt")
+	if err != nil {
+		log.Fatalf("error, creating temporary file for log file for main(). Error: %v", err)
+	}
+	logger := getLogger(tempFile.Name())
 	logger.Println("starting")
 
 	scanner := bufio.NewScanner(os.Stdin)
