@@ -250,6 +250,11 @@ func handleMessage(logger *log.Logger, method string, bytes []byte) error {
 					Documentation: "http header accept encoding",
 				},
 				{
+					Label:         "Authorization: ",
+					Detail:        "auth header",
+					Documentation: "auth header",
+				},
+				{
 					Label:         "br",
 					Detail:        "accept-encoding value br",
 					Documentation: "accept-encoding value br",
